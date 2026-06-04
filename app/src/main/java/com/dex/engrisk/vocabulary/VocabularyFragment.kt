@@ -24,7 +24,7 @@ class VocabularyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        SeedVocabularyData.insertVocabulary()
         // Danh sách các chủ đề
         val topics = listOf(
             Topic("Animals", R.drawable.ic_animals_24),

@@ -21,6 +21,10 @@ class LessonFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        SeedBeginnerLessons.insertBeginnerLessons()
+        SeedIntermediateLessons.insertIntermediateLessons()
+        SeedAdvancedLessons.insertAdvancedLessons()
+
         setupClickListener()
     }
 
@@ -31,13 +35,17 @@ class LessonFragment : Fragment() {
         }
 
         binding.btnIntermediateStart.setOnClickListener {
-            val bundle = bundleOf("levelName" to "Intermediate")
-            findNavController().navigate(R.id.action_to_lessonListFragment, bundle)
+
+            findNavController().navigate(
+                R.id.intermediateFragment
+            )
         }
 
         binding.btnAdvancedStart.setOnClickListener {
             val bundle = bundleOf("levelName" to "Advanced")
-            findNavController().navigate(R.id.action_to_lessonListFragment, bundle)
+            findNavController().navigate(
+                R.id.advancedFragment
+            )
         }
     }
 }

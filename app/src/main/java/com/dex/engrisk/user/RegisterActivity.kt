@@ -148,5 +148,16 @@ class RegisterActivity : AppCompatActivity() {
                 binding.progressBar.visibility = View.GONE
                 binding.btnRegister.isEnabled = true
             }
+        val uid = firebaseAuth.currentUser!!.uid
+
+        val userProgress = hashMapOf(
+            "lessonProgress" to hashMapOf<String, Any>(),
+            "vocabularyProgress" to hashMapOf<String, Any>()
+        )
+
+        FirebaseFirestore.getInstance()
+            .collection("userProgress")
+            .document(uid)
+            .set(userProgress)
     }
 }

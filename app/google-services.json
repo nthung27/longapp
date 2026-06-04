@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "332848645678",
-    "project_id": "engrisk13",
-    "storage_bucket": "engrisk13.firebasestorage.app"
+    "project_number": "1038834479688",
+    "project_id": "longapp-b1816",
+    "storage_bucket": "longapp-b1816.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:332848645678:android:ff86084c05ed64f0bbc1bf",
+        "mobilesdk_app_id": "1:1038834479688:android:9d225b3c6945d7ad099e7d",
         "android_client_info": {
           "package_name": "com.dex.engrisk"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC-ZKQ1NF6n8dpweZNCDGergdq9N1XAdqw"
+          "current_key": "AIzaSyAcz7XTfThDf8l0Pl1Ys6rNDXbAm8HgXXM"
         }
       ],
       "services": {

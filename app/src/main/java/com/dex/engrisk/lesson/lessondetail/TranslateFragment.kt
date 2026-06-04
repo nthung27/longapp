@@ -198,28 +198,37 @@ class TranslateFragment : Fragment() {
     }
 
     // --- HÀM LƯU TIẾN ĐỘ ---
-    private fun saveLessonProgress(lessonId: String, userScore: Int, totalQuestions: Int) {
+    private fun saveLessonProgress(
+        lessonId: String,
+        userScore: Int,
+        totalQuestions: Int
+    ) {
+
         val uid = firebaseAuth.currentUser?.uid ?: return
 
-        // Tạo một đối tượng Map để chứa thông tin về lần làm bài này
-        val progressData = mapOf(
+        val progressData = hashMapOf(
             "score" to userScore,
             "totalQuestions" to totalQuestions,
             "completedAt" to com.google.firebase.Timestamp.now()
         )
 
-        // Kỹ thuật "dot notation" này rất hiệu quả để cập nhật một trường
-        // bên trong một đối tượng (map) trên Firestore mà không cần ghi đè cả đối tượng.
-        // ví dụ: lessonProgress.lesson_abc
-        val fieldToUpdate = "lessonProgress.$lessonId"
+        val data = hashMapOf(
+            "lessonProgress" to hashMapOf(
+                lessonId to progressData
+            )
+        )
 
-        db.collection("userProgress").document(uid)
-            .update(fieldToUpdate, progressData)
+        db.collection("userProgress")
+            .document(uid)
+            .set(
+                data,
+                com.google.firebase.firestore.SetOptions.merge()
+            )
             .addOnSuccessListener {
-                Log.d(TAG, "Lesson progress saved successfully for lesson: $lessonId")
+                Log.d("SAVE_PROGRESS", "Lưu tiến độ thành công")
             }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error saving lesson progress", e)
+            .addOnFailureListener {
+                Log.e("SAVE_PROGRESS", "Lỗi lưu tiến độ", it)
             }
     }
 }

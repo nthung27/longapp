@@ -83,7 +83,16 @@ class LessonListFragment : Fragment() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 binding.progressBar.visibility = View.GONE
-                val lessons = querySnapshot.toObjects(Lesson::class.java)
+                val lessons = querySnapshot.documents.map { doc ->
+
+                    Lesson(
+                        id = doc.id,
+                        title = doc.getString("title") ?: "",
+                        type = doc.getString("type") ?: "",
+                        level = doc.getString("level") ?: "",
+                        order = doc.getLong("order")?.toInt() ?: 0
+                    )
+                }
                 if (lessons.isEmpty()) {
                     binding.rvLessons.visibility = View.GONE
                     binding.tvEmptyState.visibility = View.VISIBLE
