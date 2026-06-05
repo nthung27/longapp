@@ -118,7 +118,7 @@ class RegisterActivity : AppCompatActivity() {
      * Sau khi tạo tài khoản thành công, lưu thông tin hồ sơ người dùng vào Firestore.
      */
     private fun saveUser(uid: String, email: String) {
-        // Tạo một Map để chứa dữ liệu, đúng theo cấu trúc của dự án Engrisk
+
         val userData = hashMapOf(
             "uid" to uid,
             "email" to email,
@@ -129,35 +129,67 @@ class RegisterActivity : AppCompatActivity() {
             "currentLevel" to "Beginner"
         )
 
-        db.collection("users").document(uid)
+        db.collection("users")
+            .document(uid)
             .set(userData)
             .addOnSuccessListener {
-                // Lưu hồ sơ vào Firestore thành công
-                Log.d(TAG, "Hồ sơ người dùng đã được tạo trong Firestore cho UID: $uid")
-                Toast.makeText(this, "Đăng ký và tạo hồ sơ thành công!", Toast.LENGTH_SHORT).show()
-                binding.progressBar.visibility = View.GONE
-                // Chuyển hướng đến màn hình đăng nhập
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
-                finish()
+
+                // Tạo dữ liệu tiến trình học mặc định
+                val userProgress = hashMapOf(
+                    "lessonProgress" to hashMapOf<String, Any>(),
+                    "vocabularyProgress" to hashMapOf<String, Any>()
+                )
+
+                FirebaseFirestore.getInstance()
+                    .collection("userProgress")
+                    .document(uid)
+                    .set(userProgress)
+                    .addOnSuccessListener {
+
+                        Log.d(TAG, "Hồ sơ người dùng đã được tạo cho UID: $uid")
+
+                        // Đăng xuất tài khoản vừa tạo
+                        firebaseAuth.signOut()
+
+                        Toast.makeText(
+                            this,
+                            "Đăng ký thành công! Vui lòng đăng nhập.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        binding.progressBar.visibility = View.GONE
+
+                        val intent = Intent(this, LoginActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                        startActivity(intent)
+                        finish()
+                    }
+                    .addOnFailureListener { e ->
+                        Log.e(TAG, "Lỗi tạo userProgress", e)
+
+                        Toast.makeText(
+                            this,
+                            "Lỗi tạo dữ liệu học tập: ${e.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        binding.progressBar.visibility = View.GONE
+                        binding.btnRegister.isEnabled = true
+                    }
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Lỗi khi tạo hồ sơ người dùng", e)
-                Toast.makeText(this, "Lỗi khi lưu dữ liệu hồ sơ: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e(TAG, "Lỗi tạo hồ sơ người dùng", e)
+
+                Toast.makeText(
+                    this,
+                    "Lỗi khi lưu hồ sơ: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+
                 binding.progressBar.visibility = View.GONE
                 binding.btnRegister.isEnabled = true
             }
-        val uid = firebaseAuth.currentUser!!.uid
-
-        val userProgress = hashMapOf(
-            "lessonProgress" to hashMapOf<String, Any>(),
-            "vocabularyProgress" to hashMapOf<String, Any>()
-        )
-
-        FirebaseFirestore.getInstance()
-            .collection("userProgress")
-            .document(uid)
-            .set(userProgress)
     }
 }
