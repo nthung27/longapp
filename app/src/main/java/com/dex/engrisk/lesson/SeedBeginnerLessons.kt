@@ -77,23 +77,28 @@ object SeedBeginnerLessons {
             "questions" to listOf(
                 hashMapOf(
                     "full_sentence" to "The book is on the table",
-                    "blank_word" to "on"
+                    "blank_word" to "on",
+                    "vi_meaning" to "Quyển sách ở trên bàn"
                 ),
                 hashMapOf(
                     "full_sentence" to "The cat is under the chair",
-                    "blank_word" to "under"
+                    "blank_word" to "under",
+                    "vi_meaning" to "Con mèo ở dưới ghế"
                 ),
                 hashMapOf(
                     "full_sentence" to "The school is near my house",
-                    "blank_word" to "near"
+                    "blank_word" to "near",
+                    "vi_meaning" to "Trường học gần nhà tôi"
                 ),
                 hashMapOf(
                     "full_sentence" to "The ball is behind the box",
-                    "blank_word" to "behind"
+                    "blank_word" to "behind",
+                    "vi_meaning" to "Quả bóng ở phía sau cái hộp"
                 ),
                 hashMapOf(
                     "full_sentence" to "The picture is above the desk",
-                    "blank_word" to "above"
+                    "blank_word" to "above",
+                    "vi_meaning" to "Bức tranh ở phía trên bàn học"
                 )
             )
         )
@@ -107,6 +112,7 @@ object SeedBeginnerLessons {
             "questions" to listOf(
                 hashMapOf(
                     "en_sentence" to "My best friend is very kind",
+                    "vi_meaning" to "Người bạn thân nhất của tôi rất tốt bụng",
                     "correct_answer" to "friend",
                     "options" to listOf(
                         "teacher",
@@ -116,6 +122,7 @@ object SeedBeginnerLessons {
                 ),
                 hashMapOf(
                     "en_sentence" to "We play football together",
+                    "vi_meaning" to "Chúng tôi chơi bóng đá cùng nhau",
                     "correct_answer" to "football",
                     "options" to listOf(
                         "basketball",
@@ -125,6 +132,7 @@ object SeedBeginnerLessons {
                 ),
                 hashMapOf(
                     "en_sentence" to "She always helps me",
+                    "vi_meaning" to "Cô ấy luôn giúp đỡ tôi",
                     "correct_answer" to "helps",
                     "options" to listOf(
                         "ignores",
@@ -134,6 +142,7 @@ object SeedBeginnerLessons {
                 ),
                 hashMapOf(
                     "en_sentence" to "Friends should be honest",
+                    "vi_meaning" to "Bạn bè nên trung thực",
                     "correct_answer" to "honest",
                     "options" to listOf(
                         "lazy",

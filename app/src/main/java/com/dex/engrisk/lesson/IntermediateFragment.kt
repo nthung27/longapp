@@ -62,5 +62,29 @@ class IntermediateFragment : Fragment() {
                 bundle
             )
         }
+
+        binding.cardHealth.setOnClickListener {
+
+            val bundle = bundleOf(
+                "lessonId" to "intermediate_04"
+            )
+
+            findNavController().navigate(
+                R.id.action_to_listenFillBlankFragment,
+                bundle
+            )
+        }
+
+        binding.cardEnvironment.setOnClickListener {
+
+            val bundle = bundleOf(
+                "lessonId" to "intermediate_05"
+            )
+
+            findNavController().navigate(
+                R.id.action_to_listenChooseCorrectFragment,
+                bundle
+            )
+        }
     }
 }

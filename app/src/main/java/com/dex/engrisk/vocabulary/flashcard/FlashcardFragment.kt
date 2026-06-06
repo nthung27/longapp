@@ -124,15 +124,38 @@ class FlashcardFragment : Fragment(), TextToSpeech.OnInitListener {
 
     private fun displayCurrentCard() {
         if (vocabularyList.isNotEmpty() && currentCardIndex in vocabularyList.indices) {
+
             val vocabulary = vocabularyList[currentCardIndex]
-            val progressPercentage = ((currentCardIndex + 1) * 100 / vocabularyList.size)
+
+            // Cập nhật tiến trình
+            val progressPercentage =
+                ((currentCardIndex + 1) * 100 / vocabularyList.size)
+
             binding.progressIndicator.progress = progressPercentage
+
+            // Hiển thị thông tin từ vựng
             binding.tvWord.text = vocabulary.word
             binding.tvPronunciation.text = vocabulary.pronunciation
             binding.tvDefinition.text = vocabulary.definition
             binding.tvWordTypeBack.text = vocabulary.type
             binding.tvExample.text = "Example: ${vocabulary.example}"
-            Glide.with(this).load(vocabulary.imageUrl).into(binding.ivWordImage)
+
+            // ================= HIỂN THỊ ẢNH TỪ DRAWABLE =================
+            val resourceId = requireContext().resources.getIdentifier(
+                vocabulary.imageUrl,
+                "drawable",
+                requireContext().packageName
+            )
+
+            if (resourceId != 0) {
+                binding.ivWordImage.setImageResource(resourceId)
+            } else {
+                // Ảnh mặc định nếu không tìm thấy
+                binding.ivWordImage.setImageResource(R.drawable.ic_launcher_foreground)
+                Log.e(TAG, "Không tìm thấy ảnh: ${vocabulary.imageUrl}")
+            }
+            // ============================================================
+
             resetCard()
             speakCurrentWord()
         }

@@ -33,9 +33,12 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initFirebase()
         setupClickListeners()
         observeUserData()
+
+        loadStatistics()
     }
 
     private fun initFirebase() {
@@ -65,6 +68,29 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun loadStatistics() {
+
+        // Đếm số bài học
+        db.collection("lessons")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                binding.tvLessonCount.text = snapshot.size().toString()
+            }
+            .addOnFailureListener {
+                binding.tvLessonCount.text = "0"
+            }
+
+        // Đếm số từ vựng
+        db.collection("vocabulary")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                binding.tvVocabularyCount.text = snapshot.size().toString()
+            }
+            .addOnFailureListener {
+                binding.tvVocabularyCount.text = "0"
+            }
     }
 
     //======================================================================

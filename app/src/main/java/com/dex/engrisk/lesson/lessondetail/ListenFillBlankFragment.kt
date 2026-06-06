@@ -152,19 +152,28 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
 
     // --- XỬ LÝ KHI NHẤN NÚT "KIỂM TRA" ---
     private fun handleCheckAnswer() {
+
         val userAnswer = binding.etAnswer.text.toString().trim()
         val question = questions[currentQuestionIndex]
+
         val correctAnswer = question["blank_word"] ?: ""
+        val fullSentence = question["full_sentence"] ?: ""
+        val viMeaning = question["vi_meaning"] ?: ""
 
         binding.etAnswer.isEnabled = false
         binding.btnCheck.isEnabled = false
 
         val isCorrect = userAnswer.equals(correctAnswer, ignoreCase = true)
+
         if (isCorrect) {
             score++
         }
 
-        showFeedbackPanel(isCorrect, "Đáp án đúng: ${questions[currentQuestionIndex]["full_sentence"]}")
+        showFeedbackPanel(
+            isCorrect,
+            "Đáp án đúng: $fullSentence",
+            viMeaning
+        )
     }
 
     // --- XỬ LÝ KHI NHẤN NÚT "TIẾP TỤC" ---
@@ -173,22 +182,63 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
         displayCurrentQuestion()
     }
 
-    private fun showFeedbackPanel(isCorrect: Boolean, correctAnswerText: String) {
+    private fun showFeedbackPanel(
+        isCorrect: Boolean,
+        correctAnswerText: String,
+        viMeaning: String
+    ) {
+
         if (isCorrect) {
-            binding.feedbackPanel.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.correct_green_bg)
-            binding.tvFeedback.text = "Chính xác!"
-            binding.tvFeedback.setTextColor(ContextCompat.getColor(requireContext(), R.color.correct_green))
+
+            binding.feedbackPanel.backgroundTintList =
+                ContextCompat.getColorStateList(
+                    requireContext(),
+                    R.color.correct_green_bg
+                )
+
+            binding.tvFeedback.text =
+                "Chính xác!\n\nNghĩa: $viMeaning"
+
+            binding.tvFeedback.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.correct_green
+                )
+            )
+
             binding.tvCorrectAnswer.visibility = View.GONE
+
         } else {
-            binding.feedbackPanel.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.incorrect_red_bg)
-            binding.tvFeedback.text = "Chưa chính xác!"
-            binding.tvFeedback.setTextColor(ContextCompat.getColor(requireContext(), R.color.incorrect_red))
+
+            binding.feedbackPanel.backgroundTintList =
+                ContextCompat.getColorStateList(
+                    requireContext(),
+                    R.color.incorrect_red_bg
+                )
+
+            binding.tvFeedback.text =
+                "Chưa chính xác!\n\nNghĩa: $viMeaning"
+
+            binding.tvFeedback.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.incorrect_red
+                )
+            )
+
             binding.tvCorrectAnswer.visibility = View.VISIBLE
             binding.tvCorrectAnswer.text = correctAnswerText
         }
+
         binding.feedbackPanel.visibility = View.VISIBLE
-        binding.feedbackPanel.translationY = binding.feedbackPanel.height.toFloat()
-        binding.feedbackPanel.animate().translationY(0f).setDuration(300).start()
+        binding.feedbackPanel.translationY =
+            binding.feedbackPanel.height.toFloat()
+
+        binding.feedbackPanel.animate()
+            .translationY(0f)
+            .setDuration(300)
+            .start()
+
         binding.btnCheck.visibility = View.GONE
     }
 

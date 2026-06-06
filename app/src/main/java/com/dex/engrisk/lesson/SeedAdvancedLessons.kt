@@ -94,27 +94,32 @@ object SeedAdvancedLessons {
 
                 hashMapOf(
                     "full_sentence" to "Continuous learning is essential for career growth",
-                    "blank_word" to "learning"
+                    "blank_word" to "learning",
+                    "vi_meaning" to "Việc học tập liên tục là điều cần thiết cho sự phát triển nghề nghiệp."
                 ),
 
                 hashMapOf(
                     "full_sentence" to "Leadership skills improve workplace performance",
-                    "blank_word" to "Leadership"
+                    "blank_word" to "Leadership",
+                    "vi_meaning" to "Kỹ năng lãnh đạo giúp cải thiện hiệu suất làm việc."
                 ),
 
                 hashMapOf(
                     "full_sentence" to "Networking creates professional opportunities",
-                    "blank_word" to "Networking"
+                    "blank_word" to "Networking",
+                    "vi_meaning" to "Xây dựng các mối quan hệ tạo ra cơ hội nghề nghiệp."
                 ),
 
                 hashMapOf(
                     "full_sentence" to "Successful employees adapt to change",
-                    "blank_word" to "adapt"
+                    "blank_word" to "adapt",
+                    "vi_meaning" to "Những nhân viên thành công biết thích nghi với sự thay đổi."
                 ),
 
                 hashMapOf(
                     "full_sentence" to "Time management increases productivity",
-                    "blank_word" to "productivity"
+                    "blank_word" to "productivity",
+                    "vi_meaning" to "Quản lý thời gian giúp tăng năng suất làm việc."
                 )
             )
         )
@@ -131,6 +136,7 @@ object SeedAdvancedLessons {
 
                 hashMapOf(
                     "en_sentence" to "Climate change affects every country.",
+                    "vi_meaning" to "Biến đổi khí hậu ảnh hưởng đến mọi quốc gia.",
                     "correct_answer" to "Climate change",
                     "options" to listOf(
                         "Sports",
@@ -141,6 +147,7 @@ object SeedAdvancedLessons {
 
                 hashMapOf(
                     "en_sentence" to "Renewable energy reduces pollution.",
+                    "vi_meaning" to "Năng lượng tái tạo giúp giảm ô nhiễm môi trường.",
                     "correct_answer" to "Renewable energy",
                     "options" to listOf(
                         "Plastic waste",
@@ -151,6 +158,7 @@ object SeedAdvancedLessons {
 
                 hashMapOf(
                     "en_sentence" to "Education improves quality of life.",
+                    "vi_meaning" to "Giáo dục giúp nâng cao chất lượng cuộc sống.",
                     "correct_answer" to "Education",
                     "options" to listOf(
                         "Entertainment",
@@ -161,6 +169,7 @@ object SeedAdvancedLessons {
 
                 hashMapOf(
                     "en_sentence" to "Technology helps solve global problems.",
+                    "vi_meaning" to "Công nghệ giúp giải quyết các vấn đề toàn cầu.",
                     "correct_answer" to "Technology",
                     "options" to listOf(
                         "Weather",
@@ -171,6 +180,7 @@ object SeedAdvancedLessons {
 
                 hashMapOf(
                     "en_sentence" to "International cooperation is important.",
+                    "vi_meaning" to "Hợp tác quốc tế là rất quan trọng.",
                     "correct_answer" to "cooperation",
                     "options" to listOf(
                         "competition",

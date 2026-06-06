@@ -147,21 +147,36 @@ class ListenChooseCorrectFragment : Fragment(), TextToSpeech.OnInitListener {
     }
 
     // --- HÀM XỬ LÝ KHI NGƯỜI DÙNG NHẤN VÀO MỘT NÚT TRẢ LỜI ---
-    private fun handleAnswer(clickedButton: MaterialButton, correctAnswer: String) {
+    private fun handleAnswer(
+        clickedButton: MaterialButton,
+        correctAnswer: String
+    ) {
+
         optionButtons.forEach { it.isEnabled = false }
 
+        val question = questions[currentQuestionIndex]
+        val viMeaning = question["vi_meaning"] as? String ?: ""
+
         val isCorrect = clickedButton.text.toString() == correctAnswer
+
         if (isCorrect) {
             score++
-            clickedButton.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.correct_green))
+            clickedButton.strokeColor = ColorStateList.valueOf(
+                ContextCompat.getColor(requireContext(), R.color.correct_green)
+            )
         } else {
-            clickedButton.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.incorrect_red))
+            clickedButton.strokeColor = ColorStateList.valueOf(
+                ContextCompat.getColor(requireContext(), R.color.incorrect_red)
+            )
+
             optionButtons.find { it.text.toString() == correctAnswer }?.apply {
-                strokeColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.correct_green))
+                strokeColor = ColorStateList.valueOf(
+                    ContextCompat.getColor(requireContext(), R.color.correct_green)
+                )
             }
         }
-        showFeedbackPanel(isCorrect, correctAnswer)
 
+        showFeedbackPanel(isCorrect, correctAnswer, viMeaning)
     }
 
     private fun handleNextQuestion() {
@@ -176,22 +191,66 @@ class ListenChooseCorrectFragment : Fragment(), TextToSpeech.OnInitListener {
         }
     }
 
-    private fun showFeedbackPanel(isCorrect: Boolean, correctAnswer: String) {
+    private fun showFeedbackPanel(
+        isCorrect: Boolean,
+        correctAnswer: String,
+        viMeaning: String
+    ) {
+
         if (isCorrect) {
-            binding.feedbackPanel.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.correct_green_bg)
-            binding.tvFeedback.text = "Chính xác!"
-            binding.tvFeedback.setTextColor(ContextCompat.getColor(requireContext(), R.color.correct_green))
+
+            binding.feedbackPanel.backgroundTintList =
+                ContextCompat.getColorStateList(
+                    requireContext(),
+                    R.color.correct_green_bg
+                )
+
+            binding.tvFeedback.text =
+                "Chính xác!\n\nNghĩa: $viMeaning"
+
+            binding.tvFeedback.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.correct_green
+                )
+            )
+
             binding.tvCorrectAnswer.visibility = View.GONE
+
         } else {
-            binding.feedbackPanel.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.incorrect_red_bg)
-            binding.tvFeedback.text = "Chưa chính xác!"
-            binding.tvFeedback.setTextColor(ContextCompat.getColor(requireContext(), R.color.incorrect_red))
+
+            binding.feedbackPanel.backgroundTintList =
+                ContextCompat.getColorStateList(
+                    requireContext(),
+                    R.color.incorrect_red_bg
+                )
+
+            binding.tvFeedback.text =
+                "Chưa chính xác!\n\nNghĩa: $viMeaning"
+
+            binding.tvFeedback.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.incorrect_red
+                )
+            )
+
             binding.tvCorrectAnswer.visibility = View.VISIBLE
-            binding.tvCorrectAnswer.text = "Đáp án đúng: $correctAnswer"
+
+            binding.tvCorrectAnswer.text =
+                "Đáp án đúng: $correctAnswer"
         }
+
         binding.feedbackPanel.visibility = View.VISIBLE
-        binding.feedbackPanel.translationY = binding.feedbackPanel.height.toFloat()
-        binding.feedbackPanel.animate().translationY(0f).setDuration(300).start()
+
+        binding.feedbackPanel.translationY =
+            binding.feedbackPanel.height.toFloat()
+
+        binding.feedbackPanel.animate()
+            .translationY(0f)
+            .setDuration(300)
+            .start()
+
         binding.btnNext.visibility = View.VISIBLE
     }
 
