@@ -156,6 +156,7 @@ class ListenChooseCorrectFragment : Fragment(), TextToSpeech.OnInitListener {
 
         val question = questions[currentQuestionIndex]
         val viMeaning = question["vi_meaning"] as? String ?: ""
+        val enSentence = question["en_sentence"] as? String ?: ""
 
         val isCorrect = clickedButton.text.toString() == correctAnswer
 
@@ -176,7 +177,7 @@ class ListenChooseCorrectFragment : Fragment(), TextToSpeech.OnInitListener {
             }
         }
 
-        showFeedbackPanel(isCorrect, correctAnswer, viMeaning)
+        showFeedbackPanel(isCorrect, correctAnswer, enSentence, viMeaning)
     }
 
     private fun handleNextQuestion() {
@@ -194,8 +195,26 @@ class ListenChooseCorrectFragment : Fragment(), TextToSpeech.OnInitListener {
     private fun showFeedbackPanel(
         isCorrect: Boolean,
         correctAnswer: String,
+        enSentence: String,
         viMeaning: String
     ) {
+
+        val feedbackText = buildString {
+
+            append(
+                if (isCorrect)
+                    "✅ Chính xác!\n\n"
+                else
+                    "❌ Chưa chính xác!\n\n"
+            )
+
+            append("🇬🇧 English:\n")
+            append(enSentence)
+            append("\n\n")
+
+            append("🇻🇳 Tiếng Việt:\n")
+            append(viMeaning)
+        }
 
         if (isCorrect) {
 
@@ -204,9 +223,6 @@ class ListenChooseCorrectFragment : Fragment(), TextToSpeech.OnInitListener {
                     requireContext(),
                     R.color.correct_green_bg
                 )
-
-            binding.tvFeedback.text =
-                "Chính xác!\n\nNghĩa: $viMeaning"
 
             binding.tvFeedback.setTextColor(
                 ContextCompat.getColor(
@@ -225,9 +241,6 @@ class ListenChooseCorrectFragment : Fragment(), TextToSpeech.OnInitListener {
                     R.color.incorrect_red_bg
                 )
 
-            binding.tvFeedback.text =
-                "Chưa chính xác!\n\nNghĩa: $viMeaning"
-
             binding.tvFeedback.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
@@ -236,20 +249,23 @@ class ListenChooseCorrectFragment : Fragment(), TextToSpeech.OnInitListener {
             )
 
             binding.tvCorrectAnswer.visibility = View.VISIBLE
-
             binding.tvCorrectAnswer.text =
-                "Đáp án đúng: $correctAnswer"
+                "✅ Đáp án đúng: $correctAnswer"
         }
+
+        binding.tvFeedback.text = feedbackText
 
         binding.feedbackPanel.visibility = View.VISIBLE
 
-        binding.feedbackPanel.translationY =
-            binding.feedbackPanel.height.toFloat()
+        binding.feedbackPanel.post {
+            binding.feedbackPanel.translationY =
+                binding.feedbackPanel.height.toFloat()
 
-        binding.feedbackPanel.animate()
-            .translationY(0f)
-            .setDuration(300)
-            .start()
+            binding.feedbackPanel.animate()
+                .translationY(0f)
+                .setDuration(300)
+                .start()
+        }
 
         binding.btnNext.visibility = View.VISIBLE
     }

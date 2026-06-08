@@ -7,7 +7,7 @@ object SeedIntermediateLessons {
     fun insertIntermediateLessons() {
 
         val db = FirebaseFirestore.getInstance()
-
+        //Bài 1
         val lesson1 = hashMapOf(
             "title" to "Travel and Vacation",
             "level" to "Intermediate",
@@ -46,6 +46,7 @@ object SeedIntermediateLessons {
             .document("intermediate_01")
             .set(lesson1)
 
+        //Bài 2
         val lesson2 = hashMapOf(
             "title" to "Restaurant Conversation",
             "level" to "Intermediate",
@@ -89,6 +90,7 @@ object SeedIntermediateLessons {
             .document("intermediate_02")
             .set(lesson2)
 
+        //Bài 3
         val lesson3 = hashMapOf(
             "title" to "Technology",
             "level" to "Intermediate",
@@ -110,11 +112,11 @@ object SeedIntermediateLessons {
                 hashMapOf(
                     "en_sentence" to "Artificial intelligence is changing the world",
                     "vi_meaning" to "Trí tuệ nhân tạo đang thay đổi thế giới.",
-                    "correct_answer" to "Artificial",
+                    "correct_answer" to "Artificial intelligence",
                     "options" to listOf(
-                        "Beautiful",
-                        "Interesting",
-                        "Powerful"
+                        "Beautiful technology",
+                        "Modern machine",
+                        "Computer program"
                     )
                 ),
 
@@ -135,6 +137,7 @@ object SeedIntermediateLessons {
             .document("intermediate_03")
             .set(lesson3)
 
+        //Bài 4
         val lesson4 = hashMapOf(
             "title" to "Health and Fitness",
             "level" to "Intermediate",
@@ -143,33 +146,33 @@ object SeedIntermediateLessons {
             "questions" to listOf(
 
                 hashMapOf(
-                    "full_sentence" to "Regular exercise improves physical health",
-                    "blank_word" to "exercise",
-                    "vi_meaning" to "Tập thể dục thường xuyên cải thiện sức khỏe thể chất."
+                    "en_sentence" to "Regular exercise improves physical health",
+                    "vi_meaning" to "Tập thể dục thường xuyên cải thiện sức khỏe thể chất.",
+                    "blank_word" to "exercise"
                 ),
 
                 hashMapOf(
-                    "full_sentence" to "A balanced diet is important",
-                    "blank_word" to "diet",
-                    "vi_meaning" to "Một chế độ ăn cân bằng rất quan trọng."
+                    "en_sentence" to "A balanced diet is important",
+                    "vi_meaning" to "Một chế độ ăn cân bằng rất quan trọng.",
+                    "blank_word" to "diet"
                 ),
 
                 hashMapOf(
-                    "full_sentence" to "Drinking water keeps the body hydrated",
-                    "blank_word" to "hydrated",
-                    "vi_meaning" to "Uống nước giúp cơ thể đủ nước."
+                    "en_sentence" to "Drinking water keeps the body hydrated",
+                    "vi_meaning" to "Uống nước giúp cơ thể đủ nước.",
+                    "blank_word" to "hydrated"
                 ),
 
                 hashMapOf(
-                    "full_sentence" to "Sleeping well increases energy",
-                    "blank_word" to "energy",
-                    "vi_meaning" to "Ngủ đủ giấc giúp tăng năng lượng."
+                    "en_sentence" to "Sleeping well increases energy",
+                    "vi_meaning" to "Ngủ đủ giấc giúp tăng năng lượng.",
+                    "blank_word" to "energy"
                 ),
 
                 hashMapOf(
-                    "full_sentence" to "Stress can affect mental health",
-                    "blank_word" to "mental",
-                    "vi_meaning" to "Căng thẳng có thể ảnh hưởng đến sức khỏe tinh thần."
+                    "en_sentence" to "Stress can affect mental health",
+                    "vi_meaning" to "Căng thẳng có thể ảnh hưởng đến sức khỏe tinh thần.",
+                    "blank_word" to "mental"
                 )
             )
         )
@@ -177,6 +180,7 @@ object SeedIntermediateLessons {
             .document("intermediate_04")
             .set(lesson4)
 
+        //Bài 5
         val lesson5 = hashMapOf(
             "title" to "Environment Protection",
             "level" to "Intermediate",

@@ -76,34 +76,34 @@ object SeedBeginnerLessons {
             "order" to 3,
             "questions" to listOf(
                 hashMapOf(
-                    "full_sentence" to "The book is on the table",
-                    "blank_word" to "on",
-                    "vi_meaning" to "Quyển sách ở trên bàn"
+                    "en_sentence" to "The book is on the table",
+                    "vi_meaning" to "Quyển sách ở trên bàn",
+                    "blank_word" to "on"
                 ),
                 hashMapOf(
-                    "full_sentence" to "The cat is under the chair",
-                    "blank_word" to "under",
-                    "vi_meaning" to "Con mèo ở dưới ghế"
+                    "en_sentence" to "The cat is under the chair",
+                    "vi_meaning" to "Con mèo ở dưới ghế",
+                    "blank_word" to "under"
                 ),
                 hashMapOf(
-                    "full_sentence" to "The school is near my house",
-                    "blank_word" to "near",
-                    "vi_meaning" to "Trường học gần nhà tôi"
+                    "en_sentence" to "The school is near my house",
+                    "vi_meaning" to "Trường học gần nhà tôi",
+                    "blank_word" to "near"
                 ),
                 hashMapOf(
-                    "full_sentence" to "The ball is behind the box",
-                    "blank_word" to "behind",
-                    "vi_meaning" to "Quả bóng ở phía sau cái hộp"
+                    "en_sentence" to "The ball is behind the box",
+                    "vi_meaning" to "Quả bóng ở phía sau cái hộp",
+                    "blank_word" to "behind"
                 ),
                 hashMapOf(
-                    "full_sentence" to "The picture is above the desk",
-                    "blank_word" to "above",
-                    "vi_meaning" to "Bức tranh ở phía trên bàn học"
+                    "en_sentence" to "The picture is above the desk",
+                    "vi_meaning" to "Bức tranh ở phía trên bàn học",
+                    "blank_word" to "above"
                 )
             )
         )
 
-        // Bài 4: Bạn bè
+// Bài 4: Bạn bè
         val lesson4 = hashMapOf(
             "title" to "Bạn bè",
             "level" to "Beginner",
@@ -115,6 +115,7 @@ object SeedBeginnerLessons {
                     "vi_meaning" to "Người bạn thân nhất của tôi rất tốt bụng",
                     "correct_answer" to "friend",
                     "options" to listOf(
+                        "friend",
                         "teacher",
                         "student",
                         "brother"
@@ -125,6 +126,7 @@ object SeedBeginnerLessons {
                     "vi_meaning" to "Chúng tôi chơi bóng đá cùng nhau",
                     "correct_answer" to "football",
                     "options" to listOf(
+                        "football",
                         "basketball",
                         "tennis",
                         "badminton"
@@ -135,6 +137,7 @@ object SeedBeginnerLessons {
                     "vi_meaning" to "Cô ấy luôn giúp đỡ tôi",
                     "correct_answer" to "helps",
                     "options" to listOf(
+                        "helps",
                         "ignores",
                         "avoids",
                         "forgets"
@@ -145,6 +148,7 @@ object SeedBeginnerLessons {
                     "vi_meaning" to "Bạn bè nên trung thực",
                     "correct_answer" to "honest",
                     "options" to listOf(
+                        "honest",
                         "lazy",
                         "angry",
                         "selfish"

@@ -119,32 +119,65 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
     private fun speakCurrentSentence() {
         if (currentQuestionIndex < questions.size) {
             val question = questions[currentQuestionIndex]
-            val sentenceToSpeak  = question["full_sentence"] ?: ""
+            val sentenceToSpeak =
+                question["en_sentence"]
+                    ?: question["full_sentence"]
+                    ?: ""
             // Phát âm câu, QUEUE_FLUSH sẽ hủy các yêu cầu phát âm trước đó để đảm bảo chỉ có câu hiện tại được đọc.
             tts.speak(sentenceToSpeak , TextToSpeech.QUEUE_FLUSH, null, "")
         }
     }
 
     private fun displayCurrentQuestion() {
+
         if (currentQuestionIndex < questions.size) {
+
             val question = questions[currentQuestionIndex]
-            // Lấy dữ liệu từ Map câu hỏi
-            val fullSentence = question["full_sentence"] ?: ""
-            val blankWord = question["blank_word"] ?: ""
 
-            // Hiển thị câu hỏi
-            val sentenceWithBlank = fullSentence.replace(blankWord, "______", ignoreCase = true)
+            val fullSentence =
+                question["en_sentence"]
+                    ?: question["full_sentence"]
+                    ?: ""
 
-            val progressPercentage = ((currentQuestionIndex + 1) * 100 / questions.size)
-            binding.progressIndicator.progress = progressPercentage
-            // Hiển thị câu đã được xử lý ra giao diện
-            binding.tvSourceSentence.text = sentenceWithBlank
+            val blankWord =
+                question["blank_word"] ?: ""
+
+            // Thay từ cần điền bằng dấu gạch dưới
+            val sentenceWithBlank =
+                fullSentence.replace(
+                    blankWord,
+                    "______",
+                    ignoreCase = true
+                )
+
+            // Cập nhật tiến độ
+            val progressPercentage =
+                ((currentQuestionIndex + 1) * 100 / questions.size)
+
+            binding.progressIndicator.progress =
+                progressPercentage
+
+            // Hiển thị câu có chỗ trống
+            binding.tvSourceSentence.text =
+                sentenceWithBlank
+
+            // Reset ô nhập đáp án
             binding.etAnswer.text?.clear()
             binding.etAnswer.isEnabled = true
+
+            // Hiển thị nút kiểm tra
             binding.btnCheck.isEnabled = true
             binding.btnCheck.visibility = View.VISIBLE
+
+            // Ẩn nút tiếp theo
+            binding.btnNext.visibility = View.GONE
+
+            // Ẩn kết quả câu trước
             hideFeedbackPanel()
+
+            // Đọc câu tiếng Anh
             speakCurrentSentence()
+
         } else {
             showCompletionDialog()
         }
@@ -157,13 +190,16 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
         val question = questions[currentQuestionIndex]
 
         val correctAnswer = question["blank_word"] ?: ""
-        val fullSentence = question["full_sentence"] ?: ""
+
+        val fullSentence =
+            question["en_sentence"]
+                ?: question["full_sentence"]
+                ?: ""
+
         val viMeaning = question["vi_meaning"] ?: ""
 
-        binding.etAnswer.isEnabled = false
-        binding.btnCheck.isEnabled = false
-
-        val isCorrect = userAnswer.equals(correctAnswer, ignoreCase = true)
+        val isCorrect =
+            userAnswer.equals(correctAnswer, ignoreCase = true)
 
         if (isCorrect) {
             score++
@@ -171,7 +207,8 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
 
         showFeedbackPanel(
             isCorrect,
-            "Đáp án đúng: $fullSentence",
+            correctAnswer,
+            fullSentence,
             viMeaning
         )
     }
@@ -185,8 +222,28 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
     private fun showFeedbackPanel(
         isCorrect: Boolean,
         correctAnswerText: String,
+        enSentence: String,
         viMeaning: String
     ) {
+
+        val feedbackText = buildString {
+
+            append(
+                if (isCorrect)
+                    "✅ Chính xác!\n\n"
+                else
+                    "❌ Chưa chính xác!\n\n"
+            )
+
+            append("🇬🇧 English:\n")
+            append(enSentence)
+            append("\n\n")
+
+            append("🇻🇳 Tiếng Việt:\n")
+            append(viMeaning)
+        }
+
+        binding.tvFeedback.text = feedbackText
 
         if (isCorrect) {
 
@@ -195,9 +252,6 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
                     requireContext(),
                     R.color.correct_green_bg
                 )
-
-            binding.tvFeedback.text =
-                "Chính xác!\n\nNghĩa: $viMeaning"
 
             binding.tvFeedback.setTextColor(
                 ContextCompat.getColor(
@@ -216,9 +270,6 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
                     R.color.incorrect_red_bg
                 )
 
-            binding.tvFeedback.text =
-                "Chưa chính xác!\n\nNghĩa: $viMeaning"
-
             binding.tvFeedback.setTextColor(
                 ContextCompat.getColor(
                     requireContext(),
@@ -227,19 +278,27 @@ class ListenFillBlankFragment : Fragment(), TextToSpeech.OnInitListener {
             )
 
             binding.tvCorrectAnswer.visibility = View.VISIBLE
-            binding.tvCorrectAnswer.text = correctAnswerText
+
+            binding.tvCorrectAnswer.text =
+                "✅ Đáp án đúng: $correctAnswerText"
         }
 
         binding.feedbackPanel.visibility = View.VISIBLE
-        binding.feedbackPanel.translationY =
-            binding.feedbackPanel.height.toFloat()
 
-        binding.feedbackPanel.animate()
-            .translationY(0f)
-            .setDuration(300)
-            .start()
+        binding.feedbackPanel.post {
+
+            binding.feedbackPanel.translationY =
+                binding.feedbackPanel.height.toFloat()
+
+            binding.feedbackPanel.animate()
+                .translationY(0f)
+                .setDuration(300)
+                .start()
+        }
 
         binding.btnCheck.visibility = View.GONE
+        binding.btnNext.visibility = View.VISIBLE
+        binding.btnNext.isEnabled = true
     }
 
     private fun hideFeedbackPanel() {

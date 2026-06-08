@@ -93,33 +93,33 @@ object SeedAdvancedLessons {
             "questions" to listOf(
 
                 hashMapOf(
-                    "full_sentence" to "Continuous learning is essential for career growth",
-                    "blank_word" to "learning",
-                    "vi_meaning" to "Việc học tập liên tục là điều cần thiết cho sự phát triển nghề nghiệp."
+                    "en_sentence" to "Continuous learning is essential for career growth",
+                    "vi_meaning" to "Việc học tập liên tục là điều cần thiết cho sự phát triển nghề nghiệp.",
+                    "blank_word" to "learning"
                 ),
 
                 hashMapOf(
-                    "full_sentence" to "Leadership skills improve workplace performance",
-                    "blank_word" to "Leadership",
-                    "vi_meaning" to "Kỹ năng lãnh đạo giúp cải thiện hiệu suất làm việc."
+                    "en_sentence" to "Leadership skills improve workplace performance",
+                    "vi_meaning" to "Kỹ năng lãnh đạo giúp cải thiện hiệu suất làm việc.",
+                    "blank_word" to "Leadership"
                 ),
 
                 hashMapOf(
-                    "full_sentence" to "Networking creates professional opportunities",
-                    "blank_word" to "Networking",
-                    "vi_meaning" to "Xây dựng các mối quan hệ tạo ra cơ hội nghề nghiệp."
+                    "en_sentence" to "Networking creates professional opportunities",
+                    "vi_meaning" to "Xây dựng các mối quan hệ tạo ra cơ hội nghề nghiệp.",
+                    "blank_word" to "Networking"
                 ),
 
                 hashMapOf(
-                    "full_sentence" to "Successful employees adapt to change",
-                    "blank_word" to "adapt",
-                    "vi_meaning" to "Những nhân viên thành công biết thích nghi với sự thay đổi."
+                    "en_sentence" to "Successful employees adapt to change",
+                    "vi_meaning" to "Những nhân viên thành công biết thích nghi với sự thay đổi.",
+                    "blank_word" to "adapt"
                 ),
 
                 hashMapOf(
-                    "full_sentence" to "Time management increases productivity",
-                    "blank_word" to "productivity",
-                    "vi_meaning" to "Quản lý thời gian giúp tăng năng suất làm việc."
+                    "en_sentence" to "Time management increases productivity",
+                    "vi_meaning" to "Quản lý thời gian giúp tăng năng suất làm việc.",
+                    "blank_word" to "productivity"
                 )
             )
         )
@@ -139,6 +139,7 @@ object SeedAdvancedLessons {
                     "vi_meaning" to "Biến đổi khí hậu ảnh hưởng đến mọi quốc gia.",
                     "correct_answer" to "Climate change",
                     "options" to listOf(
+                        "Climate change",
                         "Sports",
                         "Fashion",
                         "Movies"
@@ -150,6 +151,7 @@ object SeedAdvancedLessons {
                     "vi_meaning" to "Năng lượng tái tạo giúp giảm ô nhiễm môi trường.",
                     "correct_answer" to "Renewable energy",
                     "options" to listOf(
+                        "Renewable energy",
                         "Plastic waste",
                         "Coal smoke",
                         "Traffic jams"
@@ -161,6 +163,7 @@ object SeedAdvancedLessons {
                     "vi_meaning" to "Giáo dục giúp nâng cao chất lượng cuộc sống.",
                     "correct_answer" to "Education",
                     "options" to listOf(
+                        "Education",
                         "Entertainment",
                         "Advertising",
                         "Shopping"
@@ -172,6 +175,7 @@ object SeedAdvancedLessons {
                     "vi_meaning" to "Công nghệ giúp giải quyết các vấn đề toàn cầu.",
                     "correct_answer" to "Technology",
                     "options" to listOf(
+                        "Technology",
                         "Weather",
                         "Music",
                         "Games"
@@ -183,6 +187,7 @@ object SeedAdvancedLessons {
                     "vi_meaning" to "Hợp tác quốc tế là rất quan trọng.",
                     "correct_answer" to "cooperation",
                     "options" to listOf(
+                        "cooperation",
                         "competition",
                         "conflict",
                         "isolation"
